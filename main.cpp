@@ -1,6 +1,11 @@
 #include <iostream>
-
+#include <chrono>
+#include "Activity.h"
 int main() {
-    std::cout << "Hello, World 3!" << std::endl;
+
+    auto a = new Activity("Campeggio", "diocane", "merda");
+
+
+    std::cout << "Hello world" << a->getDescription() << std::endl;
     return 0;
 }
