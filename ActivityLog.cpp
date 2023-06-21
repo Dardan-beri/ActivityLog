@@ -5,7 +5,7 @@
 #include "ActivityLog.h"
 #include <algorithm>
 
-void ActivityLog::addActivity(const struct activity &a) {
+void ActivityLog::addActivity(const struct activity &a){
     activities.push_back(a);
     std::sort(activities.begin(), activities.end()); //sorts by start time of activities
 }

@@ -54,7 +54,7 @@ struct activity{
     }
 };
 
-class ActivityLog {
+class ActivityLog{
 public:
     void addActivity(const struct activity &a);
     std::vector<activity> getActivities();
