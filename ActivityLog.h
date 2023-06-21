@@ -11,7 +11,7 @@
 struct time{
     int hour, minute, second;
 
-    std::string toString(){
+    std::string toString() const{
         std::stringstream s;
         s << hour << ":" << minute << ":" << second;
         return s.str();
@@ -25,7 +25,7 @@ struct time{
         return !(*this == other);
     }
 
-    bool operator<(struct time &other) const{
+    bool operator<(const struct time &other) const{
         bool result = false;
         if(hour < other.hour){
             result = true;
@@ -45,12 +45,12 @@ struct time{
 struct activity{
     std::string description, title;
     struct time start,end;
-    int getDurationSeconds(){
-        int sum = 0;
-        sum += (end.hour - start.hour)*3600;
-        sum += (end.minute - start.minute)*60;
-        sum += end.second - start.second;
-        return sum;
+    bool operator==(const struct activity &other) const{
+        return title == other.title;
+    }
+
+    bool operator<(const struct activity &other) const{
+        return start < other.start;
     }
 };
 
@@ -58,7 +58,7 @@ class ActivityLog {
 public:
     void addActivity(const struct activity &a);
     std::vector<activity> getActivities();
-    bool deleteActivity(struct activity &a);
+    void deleteActivity(struct activity &a);
 
 private:
     std::vector<activity> activities;
