@@ -56,6 +56,13 @@ struct activity{
     bool operator<(const struct activity &other) const{
         return start < other.start;
     }
+
+    std::string toString() const{
+        std::stringstream s;
+        s << "Title: " << title << std::endl << "Description: " << description << std::endl
+          << "Start: " << start.toString() << std::endl << "End: " << end.toString() << std::endl;
+        return s.str();
+    }
 };
 
 class ActivityLog{
