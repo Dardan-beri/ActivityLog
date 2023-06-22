@@ -16,7 +16,7 @@ bool ActivityLog::addActivity(const struct activity &activity) {
     }
 }
 
-std::vector<activity> ActivityLog::getActivities(){
+std::vector<activity> ActivityLog::getActivities() const{
     return activities;
 }
 
@@ -39,4 +39,8 @@ bool ActivityLog::deleteActivity(std::string &title){
         return true;
     }
     return false;
+}
+
+struct activity ActivityLog::operator[](int pos) const{
+    return activities[pos];
 }

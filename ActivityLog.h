@@ -68,9 +68,10 @@ struct activity{
 class ActivityLog{
 public:
     bool addActivity(const struct activity &a);
-    std::vector<activity> getActivities();
+    std::vector<activity> getActivities() const;
     bool deleteActivity(struct activity &a);
     bool deleteActivity(std::string &title);
+    struct activity operator[](int pos) const;
 
 private:
     std::vector<activity> activities;
