@@ -5,16 +5,38 @@
 #include "ActivityLog.h"
 #include <algorithm>
 
-void ActivityLog::addActivity(const struct activity &a){
-    activities.push_back(a);
-    std::sort(activities.begin(), activities.end()); //sorts by start time of activities
+bool ActivityLog::addActivity(const struct activity &activity) {
+    auto it = std::find(activities.begin(), activities.end(), activity);
+    if (it == activities.end()) {
+        activities.push_back(activity);
+        std::sort(activities.begin(), activities.end()); //sorts by start time of activities
+        return true;
+    }else{
+        return false;
+    }
 }
 
 std::vector<activity> ActivityLog::getActivities(){
     return activities;
 }
 
-void ActivityLog::deleteActivity(struct activity &a){
-    auto it = std::find(activities.begin(), activities.end(), a);
-    activities.erase(it);
+bool ActivityLog::deleteActivity(struct activity &activity){
+    auto it = std::find(activities.begin(), activities.end(), activity);
+    if(it != activities.end()) {
+        activities.erase(it);
+        return true;
+    }
+    return false;
+}
+
+bool ActivityLog::deleteActivity(std::string &title){
+    auto it = std::find_if(activities.begin(), activities.end(),
+                        [&title](const activity& a){
+                                return a.title == title;
+                            });
+    if(it != activities.end()) {
+        activities.erase(it);
+        return true;
+    }
+    return false;
 }

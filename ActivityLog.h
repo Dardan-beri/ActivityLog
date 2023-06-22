@@ -9,7 +9,7 @@
 #include <vector>
 
 struct time{
-    int hour, minute, second;
+    int hour, minute, second = 0;
 
     std::string toString() const{
         std::stringstream s;
@@ -67,9 +67,10 @@ struct activity{
 
 class ActivityLog{
 public:
-    void addActivity(const struct activity &a);
+    bool addActivity(const struct activity &a);
     std::vector<activity> getActivities();
-    void deleteActivity(struct activity &a);
+    bool deleteActivity(struct activity &a);
+    bool deleteActivity(std::string &title);
 
 private:
     std::vector<activity> activities;
