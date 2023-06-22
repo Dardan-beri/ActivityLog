@@ -49,6 +49,10 @@ struct activity{
         return title == other.title;
     }
 
+    bool operator!=(const struct activity &other) const{
+        return title != other.title;
+    }
+
     bool operator<(const struct activity &other) const{
         return start < other.start;
     }
