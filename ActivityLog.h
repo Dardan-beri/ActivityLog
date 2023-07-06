@@ -44,7 +44,7 @@ struct time{
 
 struct activity{
     std::string description, title;
-    struct time start,end;
+    struct time start, end;
     bool operator==(const struct activity &other) const{
         return title == other.title;
     }
