@@ -9,17 +9,21 @@
 #include <wx/osx/dialog.h>
 #include <map>
 #include "ActivityLog.h"
+#include "MainFrame.h"
+#include <wx/calctrl.h>
 
 class DialogAddDay : public wxDialog {
 public:
-    explicit DialogAddDay(const wxString& title, std::map<std::string, std::vector<ActivityLog> >& days);
+    explicit DialogAddDay(const wxString& title, MainFrame* mainFrame);
 private:
     void OnAddButtonClicked(wxCommandEvent& event);
     void OnCloseButtonClicked(wxCommandEvent& event);
 
-    std::map<std::string, std::vector<ActivityLog> >* days;
+    MainFrame* mainFrame;
+
     wxStaticText* text;
     wxTextCtrl* textCtrl;
+    wxCalendarCtrl* calendar;
 };
 
 
