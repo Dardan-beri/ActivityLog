@@ -13,7 +13,7 @@ wxIMPLEMENT_APP(App);
 
 bool App::OnInit() {
     MainFrame* frame = new MainFrame("Activity Log");
-    frame->SetClientSize(800, 600);
+    frame->SetClientSize(500, 600);
     frame->Center();
     frame->Show(true);
     return true;
