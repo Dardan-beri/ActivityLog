@@ -13,7 +13,17 @@ struct time{
 
     std::string toString() const{
         std::stringstream s;
-        s << hour << ":" << minute << ":" << second;
+        std::string str_hour = std::to_string(this->hour);
+        std::string str_minute = std::to_string(this->minute);
+        std::string str_second = std::to_string(this->second);
+        if(str_hour.length() == 1)
+            str_hour = "0" + str_hour;
+        if(str_minute.length() == 1)
+            str_minute = "0" + str_minute;
+        if(str_second.length() == 1)
+            str_second = "0" + str_second;
+
+        s << str_hour << ":" << str_minute << ":" << str_second;
         return s.str();
     }
 
