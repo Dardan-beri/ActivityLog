@@ -14,6 +14,7 @@ class MainFrame : public wxFrame {
 public:
     explicit MainFrame(const wxString& title);
     bool addDay(const std::string day);
+    bool addActivityToDay(const std::string day, const struct activity& activity);
 private:
     std::map<std::string, ActivityLog> days;
     wxListBox* sideListBox;

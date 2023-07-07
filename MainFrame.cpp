@@ -4,6 +4,7 @@
 
 #include "MainFrame.h"
 #include "DialogAddDay.h"
+#include "DialogAddActivity.h"
 
 MainFrame::MainFrame(const wxString &title): wxFrame(nullptr, wxID_ANY, title), lastSelectedDay("") {
     wxPanel* panel = new wxPanel(this);
@@ -49,8 +50,19 @@ void MainFrame::OnSideListBoxClicked(wxCommandEvent &event) {
 
 void MainFrame::OnActivityButtonClick(wxCommandEvent &event) {
     if(!lastSelectedDay.empty()){
-        //TODO: Add dialog to add activity
+        auto dialog = new DialogAddActivity(this, lastSelectedDay);
+        dialog->Center();
+        dialog->Show(true);
     } else
         wxMessageBox("You must select a day first");
 
+}
+
+bool MainFrame::addActivityToDay(const std::string day, const activity &activity) {
+    if(days.find(day) != days.end()){
+        days[day].addActivity(activity);
+        mainListBox->AppendString(activity.title + ": " + activity.description);
+        return true;
+    }else
+        return false;
 }
