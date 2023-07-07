@@ -23,7 +23,7 @@ void DialogAddDay::OnAddButtonClicked(wxCommandEvent &event) {
     std::stringstream str;
     int day, month;
     day = calendar->GetDate().GetDay();
-    month = calendar->GetDate().GetMonth();
+    month = calendar->GetDate().GetMonth() + 1;
     std::stringstream strDay, strMonth;
     if(day < 10)
         strDay << "0" << day;
