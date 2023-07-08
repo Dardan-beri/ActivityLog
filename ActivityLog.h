@@ -59,6 +59,10 @@ struct activity{
         return title == other.title;
     }
 
+    bool operator==(const std::string &other) const{
+        return title == other;
+    }
+
     bool operator!=(const struct activity &other) const{
         return title != other.title;
     }

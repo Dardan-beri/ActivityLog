@@ -30,9 +30,7 @@ bool ActivityLog::deleteActivity(struct activity &activity){
 }
 
 bool ActivityLog::deleteActivity(std::string &title){
-    struct activity a;
-    a.title = title;
-    auto it = std::find(activities.begin(), activities.end(), a);
+    auto it = std::find(activities.begin(), activities.end(), title);
     if(it != activities.end()) {
         activities.erase(it);
         return true;
