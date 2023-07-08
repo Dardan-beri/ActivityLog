@@ -60,8 +60,11 @@ void DialogAddActivity::OnAddButtonClicked(wxCommandEvent &event) {
         activity.start = startTime;
         activity.end = endTime;
 
-        mainFrame->addActivityToDay(day.ToStdString(), activity);
-        Close();
+        if (mainFrame->addActivityToDay(day.ToStdString(), activity)) {
+            Close();
+        } else {
+            wxMessageBox("There is already an activity with that title", "Error", wxICON_ERROR);
+        }
     }
 
 }
