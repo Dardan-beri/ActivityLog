@@ -81,6 +81,7 @@ void MainFrame::OnMainListBoxClicked(wxCommandEvent &event) {
 
 bool MainFrame::removeActivityFromDay(const std::string &day, std::string &title) {
     if(days.find(day) != days.end()){
+        days[day].deleteActivity(title);
         if(lastSelectedDay == day)
             mainListBox->Delete(mainListBox->GetSelection());
         return true;
