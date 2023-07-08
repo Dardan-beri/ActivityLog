@@ -5,6 +5,7 @@
 #include "MainFrame.h"
 #include "DialogAddDay.h"
 #include "DialogAddActivity.h"
+#include "DialogViewActivity.h"
 
 MainFrame::MainFrame(const wxString &title): wxFrame(nullptr, wxID_ANY, title), lastSelectedDay("") {
     wxPanel* panel = new wxPanel(this);
@@ -15,10 +16,10 @@ MainFrame::MainFrame(const wxString &title): wxFrame(nullptr, wxID_ANY, title), 
     dayButton->Bind(wxEVT_BUTTON, &MainFrame::OnAddButtonClick, this);
     activityButton->Bind(wxEVT_BUTTON, &MainFrame::OnActivityButtonClick, this);
     mainListBox = new wxListBox(panel, wxID_ANY, wxPoint(sideListBox->GetPosition().x + sideListBox->GetSize().x + 10, 10 + dayButton->GetSize().y + 10), wxSize(320, 540), 0, nullptr, wxLB_SORT);
+
     sideListBox->Bind(wxEVT_LISTBOX, &MainFrame::OnSideListBoxClicked, this);
+    mainListBox->Bind(wxEVT_LISTBOX, &MainFrame::OnMainListBoxClicked, this);
 }
-
-
 
 void MainFrame::OnAddButtonClick(wxCommandEvent &event) {
     DialogAddDay* dialog = new DialogAddDay("Add Day", this);
@@ -43,7 +44,7 @@ void MainFrame::OnSideListBoxClicked(wxCommandEvent &event) {
     lastSelectedDay = str;
     auto log = days[str.ToStdString()];
     for(auto &i : log.getActivities()){
-        mainListBox->AppendString(i.title + " " + i.description);
+        mainListBox->AppendString(i.title);
     }
 
 }
@@ -60,9 +61,29 @@ void MainFrame::OnActivityButtonClick(wxCommandEvent &event) {
 
 bool MainFrame::addActivityToDay(const std::string day, const activity &activity) {
     if(days.find(day) != days.end()){
-        days[day].addActivity(activity);
-        mainListBox->AppendString(activity.title + ": " + activity.description);
+        if (days[day].addActivity(activity)){
+            mainListBox->AppendString(activity.title);
+            return true;
+        }
+    }
+    return false;
+}
+
+void MainFrame::OnMainListBoxClicked(wxCommandEvent &event) {
+    auto title = event.GetString();
+    auto activities = days[lastSelectedDay.ToStdString()].getActivities();
+    struct activity act = *find(activities.begin(), activities.end(), title.ToStdString());
+
+    DialogViewActivity* dialog = new DialogViewActivity(title, this, act, lastSelectedDay);
+    dialog->Center();
+    dialog->Show(true);
+}
+
+bool MainFrame::removeActivityFromDay(const std::string &day, std::string &title) {
+    if(days.find(day) != days.end()){
+        if(lastSelectedDay == day)
+            mainListBox->Delete(mainListBox->GetSelection());
         return true;
-    }else
+    } else
         return false;
 }
