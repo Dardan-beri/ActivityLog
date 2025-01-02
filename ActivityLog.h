@@ -9,7 +9,7 @@
 #include <vector>
 
 struct time{
-    int hour, minute, second = 0;
+    int hour, minute, second;
 
     std::string toString() const{
         std::stringstream s;
