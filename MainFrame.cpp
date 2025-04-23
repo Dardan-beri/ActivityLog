@@ -10,7 +10,7 @@
 MainFrame::MainFrame(const wxString &title): wxFrame(nullptr, wxID_ANY, title), lastSelectedDay("") {
     wxPanel* panel = new wxPanel(this);
     sideListBox = new wxListBox(panel, wxID_ANY, wxPoint(10, 10), wxSize(-1, 600 - 20), 0, nullptr, wxLB_SORT);
-    wxButton* dayButton = new wxButton(panel, wxID_ANY, "Add new day", wxPoint(sideListBox->GetPosition().x + sideListBox->GetSize().x + 10, 10), wxSize(100, 30));
+    wxButton* dayButton = new wxButton(panel, wxID_ANY, "Add new date", wxPoint(sideListBox->GetPosition().x + sideListBox->GetSize().x + 10, 10), wxSize(100, 30));
     wxButton* activityButton = new wxButton(panel, wxID_ANY, "Add new activity", wxPoint(dayButton->GetPosition().x + dayButton->GetSize().x + 10, 10), wxSize(-1, 30));
 
     dayButton->Bind(wxEVT_BUTTON, &MainFrame::OnAddButtonClick, this);
@@ -22,7 +22,7 @@ MainFrame::MainFrame(const wxString &title): wxFrame(nullptr, wxID_ANY, title), 
 }
 
 void MainFrame::OnAddButtonClick(wxCommandEvent &event) {
-    DialogAddDay* dialog = new DialogAddDay("Add Day", this);
+    DialogAddDay* dialog = new DialogAddDay("Add Date", this);
     dialog->Center();
     dialog->Show(true);
 }
@@ -55,7 +55,7 @@ void MainFrame::OnActivityButtonClick(wxCommandEvent &event) {
         dialog->Center();
         dialog->Show(true);
     } else
-        wxMessageBox("You must select a day first");
+        wxMessageBox("You must select a date first");
 
 }
 

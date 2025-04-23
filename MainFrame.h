@@ -16,6 +16,7 @@ public:
     bool addDay(const std::string day);
     bool addActivityToDay(const std::string day, const struct activity& activity);
     bool removeActivityFromDay(const std::string &day, std::string &title);
+
 private:
     std::map<std::string, ActivityLog> days;
     wxListBox* sideListBox;
