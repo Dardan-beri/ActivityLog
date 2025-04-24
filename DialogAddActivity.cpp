@@ -46,19 +46,10 @@ void DialogAddActivity::OnAddButtonClicked(wxCommandEvent &event) {
     } else if (startHour > endHour || (startHour == endHour && startMinute > endMinute)) {
         wxMessageBox("Start time cannot be after end time", "Error", wxICON_ERROR);
     } else {
-        struct time startTime;
-        startTime.hour = startHour;
-        startTime.minute = startMinute;
+        Time startTime = Time(startHour, startMinute, 0);
+        Time endTime = Time(endHour, endMinute, 0);
+        Activity activity = Activity(title, description, startTime, endTime);
 
-        struct time endTime;
-        endTime.hour = endHour;
-        endTime.minute = endMinute;
-
-        struct activity activity;
-        activity.title = title;
-        activity.description = description;
-        activity.start = startTime;
-        activity.end = endTime;
 
         if (mainFrame->addActivityToDay(day.ToStdString(), activity)) {
             Close();

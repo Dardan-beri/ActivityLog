@@ -14,8 +14,8 @@ class MainFrame : public wxFrame {
 public:
     explicit MainFrame(const wxString& title);
     bool addDay(const std::string day);
-    bool addActivityToDay(const std::string day, const struct activity& activity);
-    bool removeActivityFromDay(const std::string &day, std::string &title);
+    bool addActivityToDay(const std::string day, const Activity& activity);
+    bool removeActivityFromDay(const std::string &day, std::basic_string<char, std::char_traits<char>, std::allocator<char>> title);
 
 private:
     std::map<std::string, ActivityLog> days;

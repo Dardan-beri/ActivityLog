@@ -1,7 +1,7 @@
 #include "ActivityLog.h"
 #include <algorithm>
 
-bool ActivityLog::addActivity(const struct activity &activity) {
+bool ActivityLog::addActivity(const Activity &activity) {
     auto it = std::find(activities.begin(), activities.end(), activity);
     if (it == activities.end()) {
         activities.push_back(activity);
@@ -12,11 +12,11 @@ bool ActivityLog::addActivity(const struct activity &activity) {
     }
 }
 
-std::vector<activity> ActivityLog::getActivities() const{
+std::vector<Activity> ActivityLog::getActivities() const{
     return activities;
 }
 
-bool ActivityLog::deleteActivity(struct activity &activity){
+bool ActivityLog::deleteActivity(Activity &activity){
     auto it = std::find(activities.begin(), activities.end(), activity);
     if(it != activities.end()) {
         activities.erase(it);
@@ -34,6 +34,16 @@ bool ActivityLog::deleteActivity(std::string &title){
     return false;
 }
 
-struct activity ActivityLog::operator[](int pos) const{
+Activity ActivityLog::operator[](int pos) const{
     return activities[pos];
+}
+
+std::vector<Activity> ActivityLog::getActivitiesByType(const std::string &type) const {
+    std::vector<Activity> filteredActivities;
+    for (const auto& activity : activities) {
+        if (activity.getDescription().find(type) || activity.getTitle().find(type)) {
+            filteredActivities.push_back(activity);
+        }
+    }
+    return filteredActivities;
 }

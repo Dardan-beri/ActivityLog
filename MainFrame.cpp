@@ -44,7 +44,7 @@ void MainFrame::OnSideListBoxClicked(wxCommandEvent &event) {
     lastSelectedDay = str;
     auto log = days[str.ToStdString()];
     for(auto &i : log.getActivities()){
-        mainListBox->AppendString(i.title);
+        mainListBox->AppendString(i.getTitle());
     }
 
 }
@@ -59,10 +59,10 @@ void MainFrame::OnActivityButtonClick(wxCommandEvent &event) {
 
 }
 
-bool MainFrame::addActivityToDay(const std::string day, const activity &activity) {
+bool MainFrame::addActivityToDay(const std::string day, const Activity& activity) {
     if(days.find(day) != days.end()){
         if (days[day].addActivity(activity)){
-            mainListBox->AppendString(activity.title);
+            mainListBox->AppendString(activity.getTitle());
             return true;
         }
     }
@@ -72,14 +72,14 @@ bool MainFrame::addActivityToDay(const std::string day, const activity &activity
 void MainFrame::OnMainListBoxClicked(wxCommandEvent &event) {
     auto title = event.GetString();
     auto activities = days[lastSelectedDay.ToStdString()].getActivities();
-    struct activity act = *find(activities.begin(), activities.end(), title.ToStdString());
+    Activity act = *find(activities.begin(), activities.end(), title.ToStdString());
 
     DialogViewActivity* dialog = new DialogViewActivity(title, this, act, lastSelectedDay);
     dialog->Center();
     dialog->Show(true);
 }
 
-bool MainFrame::removeActivityFromDay(const std::string &day, std::string &title) {
+bool MainFrame::removeActivityFromDay(const std::string &day, std::basic_string<char, std::char_traits<char>, std::allocator<char>> title) {
     if(days.find(day) != days.end()){
         days[day].deleteActivity(title);
         if(lastSelectedDay == day)

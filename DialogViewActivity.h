@@ -11,10 +11,10 @@
 
 class DialogViewActivity : public wxDialog{
 public:
-    explicit DialogViewActivity(wxString title, MainFrame* mainFrame, struct activity activity, wxString day);
+    explicit DialogViewActivity(wxString title, MainFrame* mainFrame, Activity activity, wxString day);
 private:
     MainFrame* mainFrame;
-    struct activity activity;
+    Activity activity;
     wxString day;
 
     void OnCloseButtonClicked(wxCommandEvent& event);
