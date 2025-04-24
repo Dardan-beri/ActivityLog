@@ -12,7 +12,7 @@ std::string Time::toString() const {
         return ss.str();
     }
 
-Time::Time(int h, int m, int s = 0) {
+Time::Time(int h, int m, int s) {
     if(h < 0 || h > 23)
         throw std::invalid_argument("Hour must be between 0 and 23");
     if(m < 0 || m > 59)

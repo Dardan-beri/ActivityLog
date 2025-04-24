@@ -11,7 +11,7 @@
 
 class Time {
 public:
-    Time(int h, int m, int s);
+    Time(int h, int m, int s = 0);
     std::string toString() const;
     bool operator==(const Time &other) const;
     bool operator!=(const Time &other) const;
